@@ -28,12 +28,7 @@ public:
         return data.at(row).at(column);
     }
 
-    const bool& bool_data(int row) const
-    {
-	return bools.at(row);
-    }
-    
-    bool& bool_data(int row)
+    const bool bool_data(int row) const
     {
 	return bools.at(row);
     }
