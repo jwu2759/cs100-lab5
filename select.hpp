@@ -68,5 +68,4 @@ class Select_And : public Select{
 		return s1->select(sheet,row) && s2->select(sheet,row);
 	}
 };
-
 #endif //__SELECT_HPP__
