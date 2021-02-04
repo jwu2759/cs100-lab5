@@ -31,7 +31,6 @@ void Spreadsheet::set_column_names(const std::vector<std::string>& names)
 void Spreadsheet::add_row(const std::vector<std::string>& row_data)
 {
     data.push_back(row_data);
-    bools.push_back(false);
 }
 
 int Spreadsheet::get_column_by_name(const std::string& name) const
@@ -44,15 +43,22 @@ int Spreadsheet::get_column_by_name(const std::string& name) const
 
 void Spreadsheet::print_selection(std::ostream& out) const{
 	//puts sets all of the 1s and 0s
-	for(int i = 0 ; i < data.size(); ++i){
-		select->select(this,i);
-	}
-	for(int i = 0 ; i < bools.size(); ++i){
-		if(!bools.at(i)){
+	if(select == nullptr){
+		for(int i = 0 ; i < data.size(); ++i){
 			for(int j = 0; j < data.at(i).size(); ++j){
 				out << data.at(i).at(j) << " ";
 			}
 			out << std::endl;
+		}
+	}
+	else{
+		for(int i = 0 ; i < data.size(); ++i){
+			if(select->select(this,i)){
+				for(int j = 0; j < data.at(i).size(); ++j){
+					out << data.at(i).at(j) << " ";
+				}
+				out << std::endl;
+			}	
 		}
 	}
 }
