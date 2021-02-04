@@ -12,6 +12,7 @@ class Spreadsheet
 {
     std::vector<std::string> column_names;
     std::vector<std::vector<std::string> > data;
+    std::vector<bool> bools;
     Select* select = nullptr;
 
 public:
@@ -25,6 +26,21 @@ public:
     std::string& cell_data(int row, int column)
     {
         return data.at(row).at(column);
+    }
+
+    const bool& bool_data(int row) const
+    {
+	return bools.at(row);
+    }
+    
+    bool& bool_data(int row)
+    {
+	return bools.at(row);
+    }
+
+    void set_bool(int row, bool new_bool)
+    {
+	bools.at(row) == new_bool;
     }
 
     void set_selection(Select* new_select);

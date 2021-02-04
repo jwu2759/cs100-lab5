@@ -31,6 +31,7 @@ void Spreadsheet::set_column_names(const std::vector<std::string>& names)
 void Spreadsheet::add_row(const std::vector<std::string>& row_data)
 {
     data.push_back(row_data);
+    bools.push_back(false);
 }
 
 int Spreadsheet::get_column_by_name(const std::string& name) const
@@ -39,4 +40,8 @@ int Spreadsheet::get_column_by_name(const std::string& name) const
         if(column_names.at(i) == name)
             return i;
     return -1;
+}
+
+void print_selection(std::ostream& out) const{
+	
 }
