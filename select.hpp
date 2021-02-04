@@ -21,9 +21,9 @@ public:
 // derive from Select or Select_Column at your convenience.
 class Select_Column: public Select
 {
-protected:
+ protected:
     int column;
-public:
+ public:
     Select_Column(const Spreadsheet* sheet, const std::string& name)
     {
         column = sheet->get_column_by_name(name);
@@ -33,30 +33,24 @@ public:
     {
         return select(sheet->cell_data(row, column));
     }
-
+ 
     // Derived classes can instead implement this simpler interface.
-    virtual bool select(const std::string& s) const = 0;
+     virtual bool select(const std::string& s) const = 0;
 };
 
 
-class Select_Contains: public Select_Column{
-  private:
-    Spreadsheet sheet;
-    std::string column_name = "";
-    std::string query = "";
-  public:
-    Select_Contains(const Spreadsheet sheet, std::string column_name, std::string query): Select_Column(const Spreadsheet* sheet, const std::string& name){
-        this = sheet;
-        this = column_name;
-        this = query;
-    }
-    virtual bool select(const Spreadsheet* sheet, int row){
-        int column = sheet.get_column_by_name(column_name);
-        if(sheet.at(row).at(column).find(query) != std::string::npos){
-          return true;
-        }
-        return false;
-    }
+class Select_Contains: public Select{
+	private:
+		int column;
+		std::string query;
+	public:
+		Select_Contains(const Spreadsheet* sheet, const std::string& name, const std::string& query){
+			column = sheet->get_column_by_name(name);		
+			this->query = query;
+		}
+		virtual bool select(const Spreadsheet* sheet, int row) const{
+			return (sheet->cell_data(row, column).find(query) != std::string::npos)? true : false;
+		}
 };
 
 
