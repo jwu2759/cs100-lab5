@@ -73,6 +73,7 @@ class Select_And : public Select{
 	}
 };
 
+
 class Select_Or : public Select{
 	private:
 		Select* s1 = nullptr;
@@ -82,11 +83,13 @@ class Select_Or : public Select{
 		s1 = select1;
 		s2 = select2;
 	}
+	~Select_Or(){
+		delete s1, s2;
+	}
 	virtual bool select(const Spreadsheet* sheet, int row)const{
 		return s1->select(sheet, row) || s2->select(sheet, row);
 	}
 };
-
 
 class Select_Not : public Select{
 	private:
