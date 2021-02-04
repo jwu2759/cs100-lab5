@@ -68,4 +68,17 @@ class Select_And : public Select{
 		return s1->select(sheet,row) && s2->select(sheet,row);
 	}
 };
+
+class Select_Not : public Select{
+	private:
+		Select* s1 = nullptr;
+	public:
+	Select_Not(Select* s){
+		s1 = s;
+	}
+	virtual bool select(const Spreadsheet* sheet, int row) const
+	{
+		return !(s1->select(sheet,row));
+	}
+};
 #endif //__SELECT_HPP__
