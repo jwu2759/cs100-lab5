@@ -63,6 +63,10 @@ class Select_And : public Select{
 		s1 = select1;
 		s2 = select2;
 	}
+	~Select_And(){
+		delete s1;
+		delete s2;
+	}
 	virtual bool select(const Spreadsheet* sheet, int row) const
 	{
 		return s1->select(sheet,row) && s2->select(sheet,row);
@@ -75,6 +79,9 @@ class Select_Not : public Select{
 	public:
 	Select_Not(Select* s){
 		s1 = s;
+	}
+	~Select_Not(){
+		delete s1;
 	}
 	virtual bool select(const Spreadsheet* sheet, int row) const
 	{
