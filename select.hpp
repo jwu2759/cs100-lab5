@@ -38,4 +38,18 @@ public:
     virtual bool select(const std::string& s) const = 0;
 };
 
+class Select_And : public Select{
+	private:
+		Select* s1 = nullptr; 
+		Select* s2 = nullptr;
+	public:
+	Select_And(Select* select1, Select* select2){
+		s1 = select1;
+		s2 = select2;
+	}
+	virtual bool select(const Spreadsheet* sheet, int row) const
+	{
+		return s1->select(sheet,row) && s2->select(sheet,row);
+	}
+};
 #endif //__SELECT_HPP__
